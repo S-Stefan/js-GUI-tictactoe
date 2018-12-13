@@ -3,6 +3,17 @@ $(function() {
   // ###Global variables###.
   // true represents X, false represents O.
   var currentPlayer = true;
+  // Game win conditions.
+  var winConditions = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+  ];
 
   // Get td elements Array.
   var $gridSquares = $("td");
@@ -50,6 +61,10 @@ $(function() {
     }
   }
 
-  var winConditions = [["X", "X", "X"], ["O", "O", "O"]];
+  function checkWins() {
+    for (var i = 0; i < winConditions.length; i++) {
+      winConditions[i];
+    }
+  }
 
 });
