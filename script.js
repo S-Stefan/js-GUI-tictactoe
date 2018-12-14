@@ -37,6 +37,7 @@ $(function() {
 
   // This function handles placing an X.
   function placeX(clicked) {
+    checkWins();
     if (clicked.attr("class") != null) {
       console.log("This square is full!");
       return;
@@ -45,6 +46,8 @@ $(function() {
       clicked.html("X");
       console.log(clicked.attr("class"));
       currentPlayer = false;
+
+      // console.log($gridSquares.eq(winConditions[0][0]).html());
     }
   }
 
@@ -61,9 +64,21 @@ $(function() {
     }
   }
 
+  // console.log(winConditions[1][1]);
   function checkWins() {
+    // for each win condition, go through the grid and check if it matches.
+    // i is the current win condition we are checking.
+    // j is the number
     for (var i = 0; i < winConditions.length; i++) {
-      winConditions[i];
+      for (var j = 0; j < 3; j++) {
+        if ($gridSquares.eq(winConditions[i][j]).html() == "X") {
+          console.log("X has won!");
+        } else if ($gridSquares.eq(winConditions[i][j]).html() == "O") {
+          console.log("O has won!");
+        } else {
+          console.log("Keep going");
+        }
+      }
     }
   }
 
