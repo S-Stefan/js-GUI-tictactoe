@@ -3,6 +3,8 @@ $(function() {
   // ###Global variables###.
   // true represents X, false represents O.
   var currentPlayer = true;
+  // If game has a winner set this to true.
+  var winner = false;
   // Game win conditions.
   var winConditions = [
     [0, 1, 2],
@@ -15,18 +17,23 @@ $(function() {
     [2, 4, 6]
   ];
 
+  // Get player turn heading element.
+  var $turnText = $(".playerTurn");
   // Get td elements Array.
   var $gridSquares = $("td");
   // Add click events listener for each square in the grid.
   for (var i = 0; i < $gridSquares.length; i++) {
     $gridSquares.eq(i).on("click", squareClicked);
   }
+  // Get reset button element, and add click event listener.
+  $("#reset").on("click", resetButtonClicked);
 
   // When a cell in the grid is clicked call this function.
   function squareClicked() {
     // Create variable to store JQuery this object.
     var clicked = $(this);
-
+    // Update turn text.
+    changeTurnText();
     // If the current player is X call placeX function and pass it the this JQuery object,
     if (currentPlayer) {
       placeX(clicked);
@@ -72,10 +79,20 @@ $(function() {
         alert("X has won!");
       } else if ($gridSquares.eq(winConditions[i][0]).html() == "O" && $gridSquares.eq(winConditions[i][1]).html() == "O" && $gridSquares.eq(winConditions[i][2]).html() == "O") {
         alert("O has won!");
-      } else {
-        return;
       }
     }
+  }
+
+  function changeTurnText() {
+    if (!currentPlayer) {
+      $turnText.html("it is X's turn");
+    } else {
+      $turnText.html("it is O's turn");
+    }
+  }
+
+  function resetButtonClicked() {
+    window.location.reload();
   }
 
 });
